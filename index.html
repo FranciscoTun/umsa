@@ -184,7 +184,7 @@
 <body>
 
 <div class="progress" id="progress"></div>
-<button class="export-btn" id="exportBtn" onclick="exportPPTX()">⬇️ Exportar PPTX</button>
+<!-- <button class="export-btn" id="exportBtn" onclick="exportPPTX()">⬇️ Exportar PPTX</button> -->
 <div class="clock">⏱ <b id="timer">00:00</b> <span class="muted">/ 25–30 min</span></div>
 
 <div class="deck" id="deck">
@@ -452,7 +452,7 @@
 </div>
 <div class="hint">← / → para navegar</div>
 
-<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js" onerror="console.warn('PptxGenJS no se pudo cargar (sin conexión). La exportación a PPTX quedará deshabilitada, pero la presentación funciona normalmente.')"></script>
 <script>
 /* ---------- Navegación de diapositivas ---------- */
 const slides=[...document.querySelectorAll('.slide')];
@@ -497,10 +497,7 @@ setInterval(()=>{
 
 /* ---------- Actividad: reconoce el gatillo ---------- */
 const trigRounds=[
-  {msg:'"⚠️ Tu cuenta de Instagram se ELIMINARÁ en 10 minutos si no confirmas tus datos AHORA."',ans:'urgencia',exp:'Urgencia: el reloj y el "ahora" buscan que actúes sin pensar.'},
-  {msg:'"Hola, soy el director de la escuela. Reenvíame la contraseña del sistema de inmediato, es una orden."',ans:'autoridad',exp:'Autoridad: se hace pasar por un superior para que obedezcas sin dudar.'},
-  {msg:'"Detectamos un virus peligroso en tu teléfono. Podrías PERDER todas tus fotos si no actúas ya."',ans:'miedo',exp:'Miedo: te asustan con una gran pérdida para nublar tu juicio.'},
-  {msg:'"🎉 ¡FELICIDADES! Ganaste un iPhone 16 GRATIS. Solo reclama tu premio dando tus datos."',ans:'codicia',exp:'Codicia / curiosidad: un premio irresistible te tienta a caer.'}
+  {msg:'"⚠️ Tu cuenta de Instagram se ELIMINARÁ en 10 minutos si no confirmas tus datos AHORA."',ans:'urgencia',exp:'Urgencia: el reloj y el "ahora" buscan que actúes sin pensar.'}
 ];
 let ti=0,tscore=0,tLocked=false;
 function loadTrig(){
@@ -539,11 +536,8 @@ loadTrig();
 
 /* ---------- Juego: phishing o legítimo ---------- */
 const rounds=[
-  {msg:'📧 "Hola, soy tu profe. Suban la tarea al aula virtual antes del viernes." (enviado desde el correo institucional oficial)',phish:false,exp:'Legítimo: viene del canal oficial y no pide datos sensibles ni mete prisa.'},
-  {msg:'📱 "BANCO: Detectamos un cargo de $9,800. Si no fuiste tú, ingresa tu usuario y contraseña aquí: http://bit.ly/banco-ya"',phish:true,exp:'¡Phishing! Urgencia + enlace acortado + te piden contraseña. Un banco nunca hace eso.'},
-  {msg:'🎁 "¡FELICIDADES! Eres el visitante 1,000,000. Reclama tu premio en 5 min dando tus datos de tarjeta."',phish:true,exp:'¡Phishing! Premio increíble + prisa + piden datos de tarjeta. Clásico cebo.'},
-  {msg:'📧 "Tu suscripción de streaming se renovó. Si tienes dudas, entra escribiendo tú mismo la página oficial en el navegador."',phish:false,exp:'Legítimo: no incluye enlaces sospechosos y te invita a verificar por tu cuenta.'},
-  {msg:'📞 "Hola, hablo de soporte de Microsoft. Su PC tiene un virus. Instale este programa que le envío para arreglarlo."',phish:true,exp:'¡Phishing/Vishing! Microsoft no llama así. Pretexting para instalarte malware.'}
+  {msg:' "BANCO: Detectamos un cargo de $9,800. Si no fuiste tú, ingresa tu usuario y contraseña aquí: http://bit.ly/banco-ya"',phish:true,exp:'¡Phishing! Urgencia + enlace acortado + te piden contraseña. Un banco nunca hace eso.'},
+  {msg:'📧 "Tu suscripción de streaming se renovó. Si tienes dudas, entra escribiendo tú mismo la página oficial en el navegador."',phish:false,exp:'Legítimo: no incluye enlaces sospechosos y te invita a verificar por tu cuenta.'}
 ];
 let gi=0,gscore=0;
 function loadGame(){
